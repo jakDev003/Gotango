@@ -1,9 +1,10 @@
-name: Deploy to Heroku Development
+name: Deploy to Heroku Production
 
 on:
   push:
-    branches:
-      - development
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -13,5 +14,6 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "obscure-crag-87544" #Must be unique in Heroku
+          heroku_app_name: "obscure-crag-87544-prod" #Must be unique in Heroku
           heroku_email: "jakDev003@gmail.com"
+          usedocker: true
