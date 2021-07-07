@@ -1,0 +1,26 @@
+
+.row-item {
+    margin: 1px;
+    width: 80%;
+    max-width: 80%;
+    min-width: 80%;
+}
+
+.quoteFormBtn {
+    margin: 5px 2px;
+}
+
+.col_qty {
+    width: 3em;
+}
+
+.col_unitCost,
+.col_subtotal {
+    width: 9em;
+}
+
+.col_description {
+    width: 21em;
+    min-width: 21em;
+    max-width: 21em;
+}

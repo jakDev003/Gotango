@@ -1,0 +1,19 @@
+<form [formGroup]="quoteForm">
+	<div
+	formArrayName="items"
+	*ngFor="let item of quoteForm.get('items')['controls']; let i = index;"
+	>
+		<div [formGroupName]="i" class="row-item">
+			<input formControlName="quantity" class="col_qty" placeholder="Number of items">
+			<input formControlName="sku" class="col_sku" placeholder="SKU/Item Number">
+			<input formControlName="description" class="col_description" placeholder="Item Description">
+			<input formControlName="unitCost" class="col_unitCost" type="text" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cost of Item">
+			<input formControlName="subTotal" class="col_subtotal" type="text" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Item SubTotal">
+		</div>
+	</div>
+	<span>
+		<button mat-raised-button color="accent" type="button" class="quoteFormBtn" (click)="addItem()">Add Item</button>
+		<button mat-raised-button color="warn" type="button" class="quoteFormBtn" (click)="removeItem()">Remove Item</button>
+		<button mat-raised-button color="primary" class="quoteFormBtn" type="submit">Submit</button>
+	</span>
+</form>
