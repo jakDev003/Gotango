@@ -15,3 +15,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "obscure-crag-87544" #Must be unique in Heroku
           heroku_email: "jakDev003@gmail.com"
+          userdocker: true
