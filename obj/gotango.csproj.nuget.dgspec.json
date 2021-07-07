@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/josh/Documents/Github/gotango/gotango.csproj": {}
+    "/home/josh/Documents/Github/Gotango/gotango.csproj": {}
   },
   "projects": {
-    "/home/josh/Documents/Github/gotango/gotango.csproj": {
+    "/home/josh/Documents/Github/Gotango/gotango.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/josh/Documents/Github/gotango/gotango.csproj",
+        "projectUniqueName": "/home/josh/Documents/Github/Gotango/gotango.csproj",
         "projectName": "gotango",
-        "projectPath": "/home/josh/Documents/Github/gotango/gotango.csproj",
+        "projectPath": "/home/josh/Documents/Github/Gotango/gotango.csproj",
         "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/home/josh/Documents/Github/gotango/obj/",
+        "outputPath": "/home/josh/Documents/Github/Gotango/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/root/.nuget/NuGet/NuGet.Config"

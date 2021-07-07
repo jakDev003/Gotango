@@ -52,7 +52,14 @@ CMD ASPNETCORE_URLS=http://*:$PORT dotnet gotango.dll
 # Purge everything
 # sudo docker system prune -a --volumes
 
-# Push to heroku
-# sudo heroku container:push web -a obscure-crag-87544
-# sudo heroku container:release web -a obscure-crag-87544
+# Heroku environments
+# 1. Development -> obscure-crag-87544
+# 2. Staging -> obscure-crag-87544-stg
+# 3. Production -> obscure-crag-87544-prod
+
+# Deployment process to Heroku (obscure-crag-87544 is the name of the heroku app)
+# 1. sudo heroku container:login
+# 2. sudo docker build -t obscure-crag-87544 .
+# 3. sudo heroku container:push -a obscure-crag-87544 web
+# 4. sudo heroku container:release -a obscure-crag-87544 web
 
