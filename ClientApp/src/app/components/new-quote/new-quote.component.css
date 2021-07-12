@@ -1,26 +1,66 @@
 
 .row-item {
     margin: 1px;
-    width: 80%;
-    max-width: 80%;
-    min-width: 80%;
+    width: 90%;
 }
 
 .quoteFormBtn {
     margin: 5px 2px;
 }
 
-.col_qty {
-    width: 3em;
+.dBlock{
+  display: inline-block;
 }
 
-.col_unitCost,
-.col_subtotal {
-    width: 9em;
+.col_customerName,
+.col_email,
+.col_phone,
+.col_quoteNum,
+.col_autogenQuoteCB{
+  width: calc((100% / 10)*2);
 }
 
-.col_description {
-    width: 21em;
-    min-width: 21em;
-    max-width: 21em;
+.col_autogenQuoteCB{
+  margin: 2px 0px;
+}
+
+#generateQuoteNum{
+  margin: 0.4% 0% 0% 0%
+}
+
+#generateQuoteNumLbl{
+  margin: 0% 0% 0% 8%
+}
+
+.row-index{
+  width: calc((100% / 11)*1);
+}
+
+.col_qty{
+  width: calc((100% / 11)*1);
+}
+
+.col_sku{
+  width: calc((100% / 11)*2);
+}
+
+.col_description{
+  width: calc((100% / 11)*5);
+}
+
+.col_unitCost{
+  width: calc((100% / 11)*1);
+}
+
+.col_subtotal{
+  width: calc((100% / 11)*1);
+}
+
+.invalid-feedback{
+  color: red;
+  font-weight: bold;
+}
+
+#customerInfoHeader label{
+  font-weight: bold;
 }

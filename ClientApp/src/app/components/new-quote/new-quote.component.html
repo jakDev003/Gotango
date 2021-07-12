@@ -1,19 +1,54 @@
 <form [formGroup]="quoteForm">
+  <div class="row-item" *ngIf="submitted">
+    <div class="invalid-feedback" *ngIf="f.customerName.errors.required">Customer Name is required</div>
+    <div class="invalid-feedback" *ngIf="f.email.errors.required">Customer Email is required</div>
+    <div class="invalid-feedback" *ngIf="f.phone.errors.required">Customer Telephone is required</div>
+    <div class="invalid-feedback" *ngIf="f.quoteNum.errors.required">Quote Number is required</div>
+    <div formArrayName="items" *ngFor="let item of quoteForm.get('items')['controls']; let i = index;">
+      <div class="invalid-feedback" *ngIf="item.f.quantity.errors.required">Quantity is required for item {{i}}.</div>
+      <div class="invalid-feedback" *ngIf="item.f.sku.errors.required">SKU is required for item {{i}}.</div>
+      <div class="invalid-feedback" *ngIf="item.f.description.errors.required">Description is required for item {{i}}.</div>
+      <div class="invalid-feedback" *ngIf="item.f.unitCost.errors.required">Unit cost is required for item {{i}}.</div>
+      <div class="invalid-feedback" *ngIf="item.f.subTotal.errors.required">Subtotal is required for item {{i}}.</div>
+    </div>
+  </div>
+
+  <h3>Customer Information</h3>
+  <div id="customerInfoHeader" class="row-item">
+    <label class="col_customerName">Customer Name</label>
+    <label class="col_email">Customer Email</label>
+    <label class="col_phone">Customer Telephone</label>
+    <label class="col_quoteNum">Quote Number</label>
+    <label class="col_autogenQuoteCB">Auto Generate</label>
+  </div>
+  <div id="customerInfo" class="row-item">
+    <input formControlName="customerName" type="text" class="col_customerName" placeholder="Customer Name">
+    <input formControlName="email" type="text" class="col_email" placeholder="Customer Email">
+    <input formControlName="phone" type="text" class="col_phone" placeholder="Customer Tel.">
+    <input formControlName="quoteNum" type="text" class="col_quoteNum" placeholder="Quote Number" [readonly]="this.generateQuoteValue">
+    <span class="col_autogenQuoteCB dBlock">
+      <input type="checkbox" formControlName="generateQuoteNum" id="generateQuoteNum" class="form-check-input" (change)="onGenerateQuoteNum($event)" />
+      <label for="generateQuoteNum" id="generateQuoteNumLbl" class="form-check-label">Quote Num.</label>
+    </span>
+  </div>
+  <h3>Quote Information</h3>
 	<div
 	formArrayName="items"
 	*ngFor="let item of quoteForm.get('items')['controls']; let i = index;"
 	>
 		<div [formGroupName]="i" class="row-item">
-			<input formControlName="quantity" class="col_qty" placeholder="Number of items">
-			<input formControlName="sku" class="col_sku" placeholder="SKU/Item Number">
-			<input formControlName="description" class="col_description" placeholder="Item Description">
-			<input formControlName="unitCost" class="col_unitCost" type="text" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cost of Item">
-			<input formControlName="subTotal" class="col_subtotal" type="text" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Item SubTotal">
+      <span class="row-index dBlock">{{i}}</span>
+			<input formControlName="quantity" class="col_qty" type="text" placeholder="Qty">
+			<input formControlName="sku" class="col_sku" type="text" placeholder="SKU/Item Number">
+			<input formControlName="description" class="col_description" type="text" placeholder="Item Description">
+			<input formControlName="unitCost" class="col_unitCost" type="text" placeholder="Cost">
+			<input formControlName="subTotal" class="col_subtotal" type="text" placeholder="SubTotal" [readonly]="true">
 		</div>
 	</div>
-	<span>
-		<button mat-raised-button color="accent" type="button" class="quoteFormBtn" (click)="addItem()">Add Item</button>
+  <div class="text-center">
+    <button mat-raised-button color="accent" type="button" class="quoteFormBtn" (click)="addItem()">Add Item</button>
 		<button mat-raised-button color="warn" type="button" class="quoteFormBtn" (click)="removeItem()">Remove Item</button>
 		<button mat-raised-button color="primary" class="quoteFormBtn" type="submit">Submit</button>
-	</span>
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Clear</button>
+  </div>
 </form>
