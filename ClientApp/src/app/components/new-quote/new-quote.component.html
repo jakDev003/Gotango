@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <h3>Customer Information</h3>
+  <h2>Customer Information</h2>
   <div id="customerInfoHeader" class="row-item">
     <label class="col_customerName">Customer Name</label>
     <label class="col_email">Customer Email</label>
@@ -30,7 +30,8 @@
       <input id="status"
             type="checkbox"
             name="status"
-            formControlName="generateQuoteNum">
+            formControlName="generateQuoteNum"
+            (change)="onGenerateQuoteNum($event)">
       <label for="status">
         <div class="status-switch"
             data-unchecked="Off"
@@ -39,17 +40,25 @@
       </label>
     </div>
   </div>
-  <h3>Quote Information</h3>
+  <h2>Quote Information</h2>
+  <div id="quoteInfoHeader" class="row-item">
+    <label class="row-index">Item</label>
+    <label class="col_qty">Quantity</label>
+    <label class="col_sku">SKU</label>
+    <label class="col_description">Description</label>
+    <label class="col_unitCost">Unit Cost</label>
+    <label class="col_subTotal">Sub Total</label>
+  </div>
 	<div
 	formArrayName="items"
 	*ngFor="let item of quoteForm.get('items')['controls']; let i = index;"
 	>
 		<div [formGroupName]="i" class="row-item">
       <span class="row-index dBlock">{{i}}</span>
-			<input formControlName="quantity" class="col_qty" type="text" placeholder="Qty">
+			<input formControlName="quantity" class="col_qty" type="text" placeholder="Qty" (change)="onQtyChange($event, i)">
 			<input formControlName="sku" class="col_sku" type="text" placeholder="SKU/Item Number">
 			<input formControlName="description" class="col_description" type="text" placeholder="Item Description">
-			<input formControlName="unitCost" class="col_unitCost" type="text" placeholder="Cost">
+			<input formControlName="unitCost" class="col_unitCost" type="text" placeholder="Cost" (change)="onCostChange($event, i)">
 			<input formControlName="subTotal" class="col_subtotal" type="text" placeholder="SubTotal" [readonly]="true">
 		</div>
 	</div>

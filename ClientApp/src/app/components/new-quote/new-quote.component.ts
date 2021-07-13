@@ -31,6 +31,9 @@ export class NewQuoteComponent implements OnInit {
 
   onGenerateQuoteNum(e): void {
     this.generateQuoteValue = e.target.checked;
+    if(e.target.checked == true) {
+      this.quoteForm.get('quoteNum').patchValue('');
+    }
   }
 
   createItem(): FormGroup {
@@ -85,6 +88,28 @@ export class NewQuoteComponent implements OnInit {
       this.submitted = false;
       this.quoteForm.reset();
       this.removeAllItems();
+  }
+
+  onQtyChange(event: any, index: number): void{
+    this.updateCost(index);
+  }
+
+  onCostChange(event: any, index: any): void{
+    this.updateCost(index);
+  }
+
+  updateCost(index: any){
+    this.items = this.quoteForm.get('items') as FormArray;
+    let row = this.items.value[index];
+    let quantity = row["quantity"];
+    let unitCost = row["unitCost"];
+    row["subTotal"] = this.customRound(quantity * unitCost);
+    row["unitCost"] = this.customRound(unitCost);
+    this.items.at(index).patchValue(row);
+  }
+
+  customRound(number): string{
+    return (Math.round(number * 100) / 100).toString();
   }
 
 }

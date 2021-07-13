@@ -76,7 +76,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* slide-toggle */
 .custom-checkbox {
   width: 8vw;
-  height: 5vh;
+  height: 3vw;
 }
 .custom-checkbox input#status {
   display: none;
