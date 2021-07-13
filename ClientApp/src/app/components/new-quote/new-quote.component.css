@@ -1,0 +1,64 @@
+form,
+label,
+input,
+select,
+text,
+button {
+  font-size: 1.5vw;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 2vw;
+}
+
+.row-item {
+    margin: 1px;
+    width: 90%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.quoteFormBtn {
+    margin: 5px 2px;
+}
+
+.dBlock{
+  display: inline-block;
+}
+
+.col_customerName,
+.col_email,
+.col_phone,
+.col_quoteNum,
+.col_autogenQuoteCB{
+  width: calc((100% / 10)*2);
+}
+
+.row-index{
+  width: calc((100% / 13)*1);
+}
+
+.col_qty{
+  width: calc((100% / 11)*1);
+}
+
+.col_sku{
+  width: calc((100% / 11)*2);
+}
+
+.col_description{
+  width: calc((100% / 11)*5);
+}
+
+.col_unitCost{
+  width: calc((100% / 11)*1);
+}
+
+.col_subtotal{
+  width: calc((100% / 11)*1);
+}
+
+.invalid-feedback{
+  color: red;
+  font-weight: bold;
+}

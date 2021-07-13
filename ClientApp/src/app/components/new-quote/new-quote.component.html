@@ -1,0 +1,71 @@
+<form [formGroup]="quoteForm">
+  <div class="row-item" *ngIf="submitted">
+    <div class="invalid-feedback" *ngIf="f.customerName.errors.required">Customer Name is required</div>
+    <div class="invalid-feedback" *ngIf="f.email.errors.required">Customer Email is required</div>
+    <div class="invalid-feedback" *ngIf="f.phone.errors.required">Customer Telephone is required</div>
+    <div class="invalid-feedback" *ngIf="f.quoteNum.errors.required">Quote Number is required</div>
+    <div formArrayName="items" *ngFor="let item of quoteForm.get('items')['controls']; let i = index;">
+      <div class="invalid-feedback" *ngIf="item.f.quantity.errors.required">Quantity is required for item {{i}}.</div>
+      <div class="invalid-feedback" *ngIf="item.f.sku.errors.required">SKU is required for item {{i}}.</div>
+      <div class="invalid-feedback" *ngIf="item.f.description.errors.required">Description is required for item {{i}}.</div>
+      <div class="invalid-feedback" *ngIf="item.f.unitCost.errors.required">Unit cost is required for item {{i}}.</div>
+      <div class="invalid-feedback" *ngIf="item.f.subTotal.errors.required">Subtotal is required for item {{i}}.</div>
+    </div>
+  </div>
+
+  <h2>Customer Information</h2>
+  <div id="customerInfoHeader" class="row-item">
+    <label class="col_customerName">Customer Name</label>
+    <label class="col_email">Customer Email</label>
+    <label class="col_phone">Customer Phone</label>
+    <label class="col_quoteNum">Quote Number</label>
+    <label class="col_autogenQuoteCB">Auto Generate</label>
+  </div>
+  <div id="customerInfo" class="row-item">
+    <input formControlName="customerName" type="text" class="col_customerName" placeholder="Customer Name">
+    <input formControlName="email" type="text" class="col_email" placeholder="Customer Email">
+    <input formControlName="phone" type="text" class="col_phone" placeholder="Customer Tel.">
+    <input formControlName="quoteNum" type="text" class="col_quoteNum" placeholder="Quote Number" [readonly]="this.generateQuoteValue">
+    <div class="custom-checkbox">
+      <input id="status"
+            type="checkbox"
+            name="status"
+            formControlName="generateQuoteNum"
+            (change)="onGenerateQuoteNum($event)">
+      <label for="status">
+        <div class="status-switch"
+            data-unchecked="Off"
+            data-checked="On">
+        </div>
+      </label>
+    </div>
+  </div>
+  <h2>Quote Information</h2>
+  <div id="quoteInfoHeader" class="row-item">
+    <label class="row-index">Item</label>
+    <label class="col_qty">Quantity</label>
+    <label class="col_sku">SKU</label>
+    <label class="col_description">Description</label>
+    <label class="col_unitCost">Unit Cost</label>
+    <label class="col_subTotal">Sub Total</label>
+  </div>
+	<div
+	formArrayName="items"
+	*ngFor="let item of quoteForm.get('items')['controls']; let i = index;"
+	>
+		<div [formGroupName]="i" class="row-item">
+      <span class="row-index dBlock">{{i}}</span>
+			<input formControlName="quantity" class="col_qty" type="text" placeholder="Qty" (change)="onQtyChange($event, i)">
+			<input formControlName="sku" class="col_sku" type="text" placeholder="SKU/Item Number">
+			<input formControlName="description" class="col_description" type="text" placeholder="Item Description">
+			<input formControlName="unitCost" class="col_unitCost" type="text" placeholder="Cost" (change)="onCostChange($event, i)">
+			<input formControlName="subTotal" class="col_subtotal" type="text" placeholder="SubTotal" [readonly]="true">
+		</div>
+	</div>
+  <div class="text-center row-item">
+    <button type="button" class="quoteFormBtn btn-secondary" (click)="addItem()">Add Item</button>
+		<button type="button" class="quoteFormBtn btn-tertiary" (click)="removeItem()">Remove Item</button>
+		<button type="submit"class="quoteFormBtn btn-primary" (click)="onSubmit()">Submit</button>
+    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset()">Clear</button>
+  </div>
+</form>
