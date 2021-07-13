@@ -1,19 +1,134 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+  /* background color pallete */
+  --color-primary: #114B5F;
+  --color-secondary: #028090;
+  --color-tertiary: #E4FDE1;
+  --color-accent: #456990;
+  --color-warn: #F45B69;
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-code {
-  color: #e01a76;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  /* text color pallete */
+  --text-color-light: #eee;
+  --text-color-dark: #333;
 }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn-primary,
+.btn-secondary,
+.btn-tertiary,
+.btn-accent,
+.btn-warn {
+  border-radius: 0.5vw;
+}
+
+.btn-primary {
+  color: var(--text-color-light);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-secondary {
+  color: var(--text-color-light);
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.btn-tertiary {
+  color: var(--text-color-dark);
+  background-color: var(--color-tertiary);
+  border-color: var(--color-tertiary);
+}
+
+.btn-accent {
+  color: var(--text-color-light);
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.btn-warn {
+  color: var(--text-color-light);
+  background-color: var(--color-warn);
+  border-color: var(--color-warn);
+}
+
+.color-primary {
+  background:var(--color-primary);
+}
+
+.color-secondary {
+  background:var(--color-secondary);
+}
+
+.color-tertiary {
+  background:var(--color-tertiary);
+}
+
+.color-accent {
+  background:var(--color-accent);
+}
+
+.color-warn {
+  background:var(--color-warn);
+}
+
+/* slide-toggle */
+.custom-checkbox {
+  width: 8vw;
+  height: 5vh;
+}
+.custom-checkbox input#status {
+  display: none;
+}
+.custom-checkbox input#status + label {
+  height: 100%;
+  width: 100%;
+  font-size: 1.5vw;
+}
+.custom-checkbox input#status + label > .status-switch {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: var(--color-warn);
+  color: var(--text-color-light);
+  transition: all 0.5s ease;
+  padding: 3px;
+  border-radius: 3px;
+}
+.custom-checkbox input#status + label > .status-switch:before, .custom-checkbox input#status + label > .status-switch:after {
+  border-radius: 2px;
+  height: calc(100% - 6px);
+  width: calc(50% - 3px);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.custom-checkbox input#status + label > .status-switch:before {
+  background-color: var(--color-accent);
+  color: var(--text-color-light);
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
+  left: 3px;
+  z-index: 10;
+  content: attr(data-unchecked);
+}
+.custom-checkbox input#status + label > .status-switch:after {
+  right: 0;
+  content: attr(data-checked);
+}
+.custom-checkbox input#status:checked + label > .status-switch {
+  background-color: var(--color-accent);
+}
+.custom-checkbox input#status:checked + label > .status-switch:after {
+  left: 0;
+  content: attr(data-unchecked);
+}
+.custom-checkbox input#status:checked + label > .status-switch:before {
+  color: var(--text-color-light);
+  left: 50%;
+  content: attr(data-checked);
+  background-color: var(--color-warn);
+}

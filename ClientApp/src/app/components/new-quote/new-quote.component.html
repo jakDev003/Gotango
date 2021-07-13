@@ -17,7 +17,7 @@
   <div id="customerInfoHeader" class="row-item">
     <label class="col_customerName">Customer Name</label>
     <label class="col_email">Customer Email</label>
-    <label class="col_phone">Customer Telephone</label>
+    <label class="col_phone">Customer Phone</label>
     <label class="col_quoteNum">Quote Number</label>
     <label class="col_autogenQuoteCB">Auto Generate</label>
   </div>
@@ -26,10 +26,18 @@
     <input formControlName="email" type="text" class="col_email" placeholder="Customer Email">
     <input formControlName="phone" type="text" class="col_phone" placeholder="Customer Tel.">
     <input formControlName="quoteNum" type="text" class="col_quoteNum" placeholder="Quote Number" [readonly]="this.generateQuoteValue">
-    <span class="col_autogenQuoteCB dBlock">
-      <input type="checkbox" formControlName="generateQuoteNum" id="generateQuoteNum" class="form-check-input" (change)="onGenerateQuoteNum($event)" />
-      <label for="generateQuoteNum" id="generateQuoteNumLbl" class="form-check-label">Quote Num.</label>
-    </span>
+    <div class="custom-checkbox">
+      <input id="status"
+            type="checkbox"
+            name="status"
+            formControlName="generateQuoteNum">
+      <label for="status">
+        <div class="status-switch"
+            data-unchecked="Off"
+            data-checked="On">
+        </div>
+      </label>
+    </div>
   </div>
   <h3>Quote Information</h3>
 	<div
@@ -45,10 +53,10 @@
 			<input formControlName="subTotal" class="col_subtotal" type="text" placeholder="SubTotal" [readonly]="true">
 		</div>
 	</div>
-  <div class="text-center">
-    <button mat-raised-button color="accent" type="button" class="quoteFormBtn" (click)="addItem()">Add Item</button>
-		<button mat-raised-button color="warn" type="button" class="quoteFormBtn" (click)="removeItem()">Remove Item</button>
-		<button mat-raised-button color="primary" class="quoteFormBtn" type="submit">Submit</button>
-    <button class="btn btn-secondary" type="reset" (click)="onReset()">Clear</button>
+  <div class="text-center row-item">
+    <button type="button" class="quoteFormBtn btn-secondary" (click)="addItem()">Add Item</button>
+		<button type="button" class="quoteFormBtn btn-tertiary" (click)="removeItem()">Remove Item</button>
+		<button type="submit"class="quoteFormBtn btn-primary" (click)="onSubmit()">Submit</button>
+    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset()">Clear</button>
   </div>
 </form>

@@ -1,7 +1,21 @@
+form,
+label,
+input,
+select,
+text,
+button {
+  font-size: 1.5vw;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 2vw;
+}
 
 .row-item {
     margin: 1px;
     width: 90%;
+    display: inline-flex;
+    align-items: center;
 }
 
 .quoteFormBtn {
@@ -18,18 +32,6 @@
 .col_quoteNum,
 .col_autogenQuoteCB{
   width: calc((100% / 10)*2);
-}
-
-.col_autogenQuoteCB{
-  margin: 2px 0px;
-}
-
-#generateQuoteNum{
-  margin: 0.4% 0% 0% 0%
-}
-
-#generateQuoteNumLbl{
-  margin: 0% 0% 0% 8%
 }
 
 .row-index{
@@ -63,4 +65,8 @@
 
 #customerInfoHeader label{
   font-weight: bold;
+}
+
+.custom-checkbox {
+  margin-left: 3.25vw;
 }
