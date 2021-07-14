@@ -1,10 +1,15 @@
 form,
-label,
-input,
-select,
-text,
-button {
+text {
   font-size: 1.5vw;
+}
+
+input,
+label,
+select,
+button,
+textarea,
+div {
+  font-size: 1vw;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -26,20 +31,25 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
 }
 
-.col_customerName,
-.col_email,
-.col_phone,
-.col_quoteNum,
-.col_autogenQuoteCB{
+.col_quoteNum{
   width: calc((100% / 10)*2);
+}
+
+.col_autogenQuoteCB{
+  width: calc((100% / 10)*4);
+}
+
+.col_customerName,
+.col_email{
+  width: calc((100% / 5)*2);
+}
+
+.col_phone{
+  width: calc((100% / 5)*1);
 }
 
 .row-index{
   width: calc((100% / 13)*1);
-}
-
-.col_qty{
-  width: calc((100% / 11)*1);
 }
 
 .col_sku{
@@ -47,18 +57,101 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .col_description{
-  width: calc((100% / 11)*5);
+  width: calc((100% / 11)*5.5);
 }
 
-.col_unitCost{
-  width: calc((100% / 11)*1);
-}
-
-.col_subtotal{
+.col_qty,
+.col_unitCost,
+.col_itemTotal{
   width: calc((100% / 11)*1);
 }
 
 .invalid-feedback{
   color: red;
   font-weight: bold;
+}
+
+.header{
+  font-size: 3em!important;
+}
+
+.col_Address {
+  width: calc((100% / 3)*1);
+}
+
+.col_CountryOrTerritory {
+  width: calc((100% / 11)*2.5);
+}
+
+.col_PostalCode{
+  width: calc((100% / 11)*1.5);
+}
+
+.col_Other{
+  width: calc((100% / 11)*2);
+}
+
+.col_City{
+  width: calc((100% / 11)*2);
+}
+
+.col_State{
+  width: calc((100% / 11)*3);
+}
+
+.col_descriptionOfWork{
+  width: 100%;
+}
+
+.col_descriptionMisc{
+  width: calc((100% / 6)*5);
+}
+
+.col_itemTotalMisc{
+  width: 10vw;
+}
+
+.col_SubTotal{
+  width: 10vw;
+}
+
+.col_SubTotalLabel{
+  width: 55vw;
+  padding-top: 1.5vh;
+  padding-right: 5px;
+  text-align: right;
+}
+
+.col_descriptionLabor{
+  width: calc((100% / 6)*3);
+}
+
+.col_HoursLabor{
+  width: calc((100% / 6)*1);
+}
+
+.col_RateLabor{
+  width: calc((100% / 6)*1);
+}
+
+.col_TotalLabor{
+  width: calc((100% / 6)*1);
+}
+
+.col_SubTotalPrimary{
+  width: calc((100% / 6)*1);
+}
+
+.col_TaxPrimary{
+  width: calc((100% / 6)*1);
+}
+
+.col_GrandTotalPrimary{
+  width: calc((100% / 6)*1);
+}
+
+#totals{
+  margin-left: 30vw;
+  width: 90%;
+  margin-bottom: 2em;
 }

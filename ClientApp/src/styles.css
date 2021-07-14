@@ -82,14 +82,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: none;
 }
 .custom-checkbox input#status + label {
-  height: 100%;
+  height: 3vw;
   width: 100%;
   font-size: 1.5vw;
 }
 .custom-checkbox input#status + label > .status-switch {
   cursor: pointer;
   width: 100%;
-  height: 100%;
+  height: 3vw;
   position: relative;
   background-color: var(--color-warn);
   color: var(--text-color-light);
@@ -131,4 +131,48 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   left: 50%;
   content: attr(data-checked);
   background-color: var(--color-warn);
+}
+
+.ml-1em {
+  margin-left: 1em!important;
+}
+
+.ml-2em {
+  margin-left: 2em!important;
+}
+
+.ml-4em {
+  margin-left: 4em!important;
+}
+
+.pl-1em {
+  padding-left: 1em!important;
+}
+
+.pl-2em {
+  padding-left: 2em!important;
+}
+
+.pl-5em {
+  padding-left: 5em!important;
+}
+
+.pw-1vw{
+  padding: 0px 1vw!important;
+}
+
+.align-left{
+  float: left;
+}
+
+.align-right{
+  float: right;
+}
+
+.ml-30pct{
+  margin-left: 30%;
+}
+
+.mt-4em{
+  margin-top: 4em;
 }
