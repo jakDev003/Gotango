@@ -33,7 +33,7 @@ import { NewQuoteComponent } from './components/new-quote/new-quote.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'new-quote', component: NewQuoteComponent },
+      { path: 'new-estimate', component: NewQuoteComponent },
     ]),
     BrowserAnimationsModule
   ],

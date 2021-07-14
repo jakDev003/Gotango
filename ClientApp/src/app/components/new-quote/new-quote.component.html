@@ -1,3 +1,4 @@
+<h1 class="header">Estimate</h1>
 <form [formGroup]="quoteForm">
   <div class="row-item" *ngIf="submitted">
     <div class="invalid-feedback" *ngIf="f.customerName.errors.required">Customer Name is required</div>
@@ -13,59 +14,149 @@
     </div>
   </div>
 
-  <h2>Customer Information</h2>
-  <div id="customerInfoHeader" class="row-item">
-    <label class="col_customerName">Customer Name</label>
-    <label class="col_email">Customer Email</label>
-    <label class="col_phone">Customer Phone</label>
+  <h2>Information</h2>
+  <div id="customerInfoHeader01" class="row-item">
     <label class="col_quoteNum">Quote Number</label>
-    <label class="col_autogenQuoteCB">Auto Generate</label>
+    <label class="col_autogenQuoteCB pl-1em">Auto Generate Quote Num</label>
   </div>
-  <div id="customerInfo" class="row-item">
-    <input formControlName="customerName" type="text" class="col_customerName" placeholder="Customer Name">
-    <input formControlName="email" type="text" class="col_email" placeholder="Customer Email">
-    <input formControlName="phone" type="text" class="col_phone" placeholder="Customer Tel.">
+  <div id="customerInfo01" class="row-item">
     <input formControlName="quoteNum" type="text" class="col_quoteNum" placeholder="Quote Number" [readonly]="this.generateQuoteValue">
-    <div class="custom-checkbox">
-      <input id="status"
-            type="checkbox"
-            name="status"
-            formControlName="generateQuoteNum"
-            (change)="onGenerateQuoteNum($event)">
+    <div class="custom-checkbox ml-4em">
+      <input id="status" type="checkbox" name="status" formControlName="generateQuoteNum" (change)="onGenerateQuoteNum($event)">
       <label for="status">
-        <div class="status-switch"
-            data-unchecked="Off"
-            data-checked="On">
-        </div>
+        <div class="status-switch" data-unchecked="Off" data-checked="On"></div>
       </label>
     </div>
   </div>
-  <h2>Quote Information</h2>
-  <div id="quoteInfoHeader" class="row-item">
+  <div id="customerInfoHeader02" class="row-item">
+    <label class="col_customerName">Name</label>
+    <label class="col_email">Email</label>
+    <label class="col_phone">Phone</label>
+  </div>
+  <div id="customerInfo02" class="row-item">
+    <input formControlName="customerName" type="text" class="col_customerName" placeholder="Customer Name">
+    <input formControlName="email" type="text" class="col_email" placeholder="Customer Email">
+    <input formControlName="phone" type="text" class="col_phone" placeholder="Customer Tel.">
+  </div>
+  <div id="customerAddressHeader01" class="row-item">
+    <label class="col_Address">Address 1</label>
+    <label class="col_Address">Address 2</label>
+    <label class="col_Address">Address 3</label>
+  </div>
+  <div id="customerAddress01" class="row-item">
+    <input formControlName="address1" type="text" class="col_Address" placeholder="Address1">
+    <input formControlName="address2" type="text" class="col_Address" placeholder="Address2">
+    <input formControlName="address3" type="text" class="col_Address" placeholder="Address3">
+  </div>
+  <div id="customerAddressHeader02" class="row-item">
+    <label class="col_CountryOrTerritory">Country or Territory</label>
+    <label class="col_PostalCode">Postal Code</label>
+    <label class="col_City">City</label>
+    <label class="col_State">State</label>
+    <label class="col_Other">Other</label>
+  </div>
+  <div id="customerAddress02" class="row-item">
+    <input formControlName="countryOrTerritory" type="text" class="col_CountryOrTerritory" placeholder="Country or Territory">
+    <input formControlName="postalCode" type="text" class="col_PostalCode" placeholder="Postal Code">
+    <input formControlName="city" type="text" class="col_City" placeholder="City">
+    <input formControlName="state" type="text" class="col_State" placeholder="State">
+    <input formControlName="other" type="text" class="col_Other" placeholder="Other">
+  </div>
+  <div id="descriptionOfWorkHeader" class="row-item">
+    <label class="col_descriptionOfWork">Description of Work</label>
+  </div>
+  <div id="descriptionOfWork" class="row-item">
+    <textarea name="description" formControlName="descriptionOfWork" maxlength="300" class="col_descriptionOfWork" placeholder="What are you doing on this job?" wrap="hard"></textarea>
+  </div>
+
+
+  <h2>Materials</h2>
+  <div id="materialsHeader" class="row-item">
     <label class="row-index">Item</label>
     <label class="col_qty">Quantity</label>
     <label class="col_sku">SKU</label>
     <label class="col_description">Description</label>
-    <label class="col_unitCost">Unit Cost</label>
-    <label class="col_subTotal">Sub Total</label>
+    <label class="col_unitCost">Unit</label>
+    <label class="col_itemTotal">Total</label>
   </div>
-	<div
-	formArrayName="items"
-	*ngFor="let item of quoteForm.get('items')['controls']; let i = index;"
-	>
+	<div formArrayName="items" *ngFor="let item of quoteForm.get('items')['controls']; let i = index;">
 		<div [formGroupName]="i" class="row-item">
       <span class="row-index dBlock">{{i}}</span>
-			<input formControlName="quantity" class="col_qty" type="text" placeholder="Qty" (change)="onQtyChange($event, i)">
+			<input formControlName="quantity" class="col_qty" type="text" placeholder="0" (change)="onQtyChange($event, i)">
 			<input formControlName="sku" class="col_sku" type="text" placeholder="SKU/Item Number">
 			<input formControlName="description" class="col_description" type="text" placeholder="Item Description">
-			<input formControlName="unitCost" class="col_unitCost" type="text" placeholder="Cost" (change)="onCostChange($event, i)">
-			<input formControlName="subTotal" class="col_subtotal" type="text" placeholder="SubTotal" [readonly]="true">
+			<input formControlName="unitCost" class="col_unitCost" type="text" placeholder="0.00" (change)="onCostChange($event, i)">
+			<input formControlName="subTotal" class="col_itemTotal" type="text" placeholder="0.00" [readonly]="true">
 		</div>
 	</div>
   <div class="text-center row-item">
-    <button type="button" class="quoteFormBtn btn-secondary" (click)="addItem()">Add Item</button>
-		<button type="button" class="quoteFormBtn btn-tertiary" (click)="removeItem()">Remove Item</button>
-		<button type="submit"class="quoteFormBtn btn-primary" (click)="onSubmit()">Submit</button>
-    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset()">Clear</button>
+    <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('materials')">+</button>
+		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('materials')">-</button>
+    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('materials')">Clear</button>
+    <label class="col_SubTotalLabel pl-1em">Materials Total</label>
+    <input formControlName="materialsTotal" class="col_SubTotal" type="text" placeholder="0.00" [readonly]="true">
+  </div>
+
+
+  <h2>Miscellaneous Charges</h2>
+  <div id="miscChargesHeader" class="row-item">
+    <label class="row-index dBlock">Item</label>
+    <label class="col_descriptionMisc">Description</label>
+    <label class="col_itemTotalMisc">Total</label>
+  </div>
+	<div formArrayName="miscCharges" *ngFor="let item of quoteForm.get('miscCharges')['controls']; let i = index;">
+		<div [formGroupName]="i" class="row-item">
+      <span class="row-index dBlock">{{i}}</span>
+			<input formControlName="descriptionMisc" class="col_descriptionMisc" type="text" placeholder="Charge Description">
+			<input formControlName="itemTotalMisc" class="col_itemTotalMisc" type="text" placeholder="0" (change)="onTotalChange_Misc($event, i)">
+		</div>
+	</div>
+  <div class="text-center row-item">
+    <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('misc')">+</button>
+		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('misc')">-</button>
+    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('misc')">Clear</button>
+    <label class="col_SubTotalLabel pl-1em">Misc Charges Total</label>
+    <input formControlName="miscChargesTotal" class="col_SubTotal" type="text" placeholder="0.00" [readonly]="true">
+  </div>
+
+  <h2>Labor Charges</h2>
+  <div id="laborChargesHeader" class="row-item">
+    <label class="row-index dBlock">Item</label>
+    <label class="col_descriptionLabor">Description</label>
+    <label class="col_HoursLabor">Hours</label>
+    <label class="col_RateLabor">Rate</label>
+    <label class="col_TotalLabor">Total</label>
+  </div>
+	<div formArrayName="laborCharges" *ngFor="let item of quoteForm.get('laborCharges')['controls']; let i = index;">
+		<div [formGroupName]="i" class="row-item">
+      <span class="row-index dBlock">{{i}}</span>
+			<input formControlName="descriptionLabor" class="col_descriptionLabor" type="text" placeholder="Labor Description">
+      <input formControlName="hoursLabor" class="col_HoursLabor" type="text" placeholder="Labor Hours">
+      <input formControlName="rateLabor" class="col_RateLabor" type="text" placeholder="Labor Rate">
+			<input formControlName="itemTotalLabor" class="col_TotalLabor" type="text" placeholder="0" (change)="onTotalChange_Labor($event, i)">
+		</div>
+	</div>
+  <div class="text-center row-item">
+    <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('labor')">+</button>
+		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('labor')">-</button>
+    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('misc')">Clear</button>
+    <label class="col_SubTotalLabel pl-1em">Labor Charges Total</label>
+    <input formControlName="laborChargesTotal" class="col_SubTotal" type="text" placeholder="0.00" [readonly]="true">
+  </div>
+
+
+  <div id="totals" class="mt-4em">
+    <div id="TotalChargesHeader" class="row-item">
+      <label class="col_SubTotalPrimary">SubTotal</label>
+      <label class="col_TaxPrimary">Tax</label>
+      <label class="col_GrandTotalPrimary">Grand Total</label>
+    </div>
+    <div class="text-center row-item">
+      <input formControlName="SubTotalPrimary" class="col_SubTotalPrimary" type="text" placeholder="0.00" [readonly]="true">
+      <input formControlName="TaxPrimary" class="col_TaxPrimary" type="text" placeholder="0.00">
+      <input formControlName="GrandTotalPrimary" class="col_GrandTotalPrimary" type="text" placeholder="0.00" [readonly]="true">
+      <button type="submit"class="quoteFormBtn btn-primary align-right" (click)="onSubmit()">Submit</button>
+      <button type="reset" class="quoteFormBtn btn-warn align-right" (click)="onReset('all')">Clear</button>
+    </div>
   </div>
 </form>
