@@ -1,9 +1,14 @@
 form,
-label,
+text {
+  font-size: 1.5vw;
+}
+
 input,
+label,
 select,
-text,
-button {
+button,
+textarea,
+div {
   font-size: 1vw;
 }
 
