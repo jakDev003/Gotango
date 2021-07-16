@@ -82,10 +82,10 @@
 	<div formArrayName="items" *ngFor="let item of quoteForm.get('items')['controls']; let i = index;">
 		<div [formGroupName]="i" class="row-item">
       <span class="row-index dBlock">{{i}}</span>
-			<input formControlName="quantity" class="col_qty" type="text" placeholder="0" (change)="onQtyChange($event, i)">
+			<input formControlName="quantity" class="col_qty" type="text" placeholder="0" (change)="onMaterialItemChange($event, i)">
 			<input formControlName="sku" class="col_sku" type="text" placeholder="SKU/Item Number">
 			<input formControlName="description" class="col_description" type="text" placeholder="Item Description">
-			<input formControlName="unitCost" class="col_unitCost" type="text" placeholder="0.00" (change)="onCostChange($event, i)">
+			<input formControlName="unitCost" class="col_unitCost" type="text" placeholder="0.00" (change)="onMaterialItemChange($event, i)">
 			<input formControlName="subTotal" class="col_itemTotal" type="text" placeholder="0.00" [readonly]="true">
 		</div>
 	</div>
@@ -108,7 +108,7 @@
 		<div [formGroupName]="i" class="row-item">
       <span class="row-index dBlock">{{i}}</span>
 			<input formControlName="descriptionMisc" class="col_descriptionMisc" type="text" placeholder="Charge Description">
-			<input formControlName="itemTotalMisc" class="col_itemTotalMisc" type="text" placeholder="0" (change)="onTotalChange_Misc($event, i)">
+			<input formControlName="itemTotalMisc" class="col_itemTotalMisc" type="text" placeholder="0" (change)="onMiscItemChange($event, i)">
 		</div>
 	</div>
   <div class="text-center row-item">
@@ -131,9 +131,9 @@
 		<div [formGroupName]="i" class="row-item">
       <span class="row-index dBlock">{{i}}</span>
 			<input formControlName="descriptionLabor" class="col_descriptionLabor" type="text" placeholder="Labor Description">
-      <input formControlName="hoursLabor" class="col_HoursLabor" type="text" placeholder="Labor Hours">
-      <input formControlName="rateLabor" class="col_RateLabor" type="text" placeholder="Labor Rate">
-			<input formControlName="itemTotalLabor" class="col_TotalLabor" type="text" placeholder="0" (change)="onTotalChange_Labor($event, i)">
+      <input formControlName="hoursLabor" class="col_HoursLabor" type="text" placeholder="Labor Hours" (change)="onLaborItemChange($event, i)">
+      <input formControlName="rateLabor" class="col_RateLabor" type="text" placeholder="Labor Rate" (change)="onLaborItemChange($event, i)">
+			<input formControlName="itemTotalLabor" class="col_TotalLabor" type="text" placeholder="0">
 		</div>
 	</div>
   <div class="text-center row-item">
@@ -153,7 +153,7 @@
     </div>
     <div class="text-center row-item">
       <input formControlName="SubTotalPrimary" class="col_SubTotalPrimary" type="text" placeholder="0.00" [readonly]="true">
-      <input formControlName="TaxPrimary" class="col_TaxPrimary" type="text" placeholder="0.00">
+      <input formControlName="TaxPrimary" class="col_TaxPrimary" type="text" placeholder="0.00" (change)="onTaxChange($event)">
       <input formControlName="GrandTotalPrimary" class="col_GrandTotalPrimary" type="text" placeholder="0.00" [readonly]="true">
       <button type="submit"class="quoteFormBtn btn-primary align-right" (click)="onSubmit()">Submit</button>
       <button type="reset" class="quoteFormBtn btn-warn align-right" (click)="onReset('all')">Clear</button>

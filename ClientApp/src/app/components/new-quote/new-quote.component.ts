@@ -68,14 +68,14 @@ export class NewQuoteComponent implements OnInit {
       case "misc":
         return this.formBuilder.group({
           descriptionMisc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-          itemTotalMisc: ['', [Validators.required, Validators.pattern(this.currencyRegex)]],
+          itemTotalMisc: ['0', [Validators.required, Validators.pattern(this.currencyRegex)]],
         });
       case "labor":
         return this.formBuilder.group({
           descriptionLabor: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-          hoursLabor: ['', [Validators.required, Validators.pattern(this.numberRegEx)]],
-          rateLabor: ['', [Validators.required, Validators.pattern(this.numberRegEx)]],
-          itemTotalLabor: ['', [Validators.required, Validators.pattern(this.currencyRegex)]],
+          hoursLabor: ['0', [Validators.required, Validators.pattern(this.numberRegEx)]],
+          rateLabor: ['0', [Validators.required, Validators.pattern(this.numberRegEx)]],
+          itemTotalLabor: ['0', [Validators.required, Validators.pattern(this.currencyRegex)]],
         });
     }
   }
@@ -170,97 +170,146 @@ export class NewQuoteComponent implements OnInit {
 
   }
 
-  onQtyChange(event: any, index: number): void{
+  onMaterialItemChange(event: any, index: number): void{
     this.updateCost(index, "materials");
   }
 
-  onCostChange(event: any, index: any): void{
-    this.updateCost(index, "materials");
-  }
-
-  onTotalChange_Misc(event: any, index: any): void{
+  onMiscItemChange(event: any, index: any): void{
     this.updateCost(index, "misc");
   }
 
-  onTotalChange_Labor(event: any, index: any): void{
+  onLaborItemChange(event: any, index: any): void{
     this.updateCost(index, "labor");
   }
 
-  updateCost(index: any, itemType: string){
-    if(itemType == "materials"){
-      this.items = this.quoteForm.get('items') as FormArray;
-      let row = this.items.value[index];
-      let quantity = parseFloat(row["quantity"]);
-      let unitCost = parseFloat(row["unitCost"]);
-      row["subTotal"] = this.customRound(quantity * unitCost);
-      row["unitCost"] = this.customRound(unitCost);
-      this.items.at(index).patchValue(row);
-    }
-    else if(itemType == "labor"){
-      this.items = this.quoteForm.get('labor') as FormArray;
-      let row = this.items.value[index];
-      let rateLabor = parseFloat(row["rateLabor"]);
-      let hoursLabor = parseFloat(row["hoursLabor"]);
-      row["itemTotalLabor"] = this.customRound(rateLabor * hoursLabor);
-      row["rateLabor"] = this.customRound(rateLabor);
-      this.items.at(index).patchValue(row);
-    }
-
-    this.updateTotalCost(itemType);
+  onTaxChange($event): void{
+    this.updateGrandTotal();
   }
 
-  updateTotalCost(itemType: string): void {
+  updateCost(index: any, itemType: string){
+    this.updateSubTotalCost(itemType, index);
+    this.updateGrandTotalCost();
+  }
+
+  updateMaterialsRowSubTotal(index: number){
+    this.items = this.quoteForm.get('items') as FormArray;
+    let row = this.items.value[index];
+    let quantity = this.parseCustomValue(row["quantity"]);
+    let unitCost = this.parseCustomValue(row["unitCost"]);
+    row["subTotal"] = quantity * unitCost;
+    row["unitCost"] = unitCost;
+    this.items.at(index).patchValue(row);
+  }
+
+  updateLaborRowSubTotal(index: number){
+    this.items = this.quoteForm.get('laborCharges') as FormArray;
+    let row = this.items.value[index];
+    let rateLabor = this.parseCustomValue(row["rateLabor"]);
+    let hoursLabor = this.parseCustomValue(row["hoursLabor"]);
+    row["itemTotalLabor"] = rateLabor * hoursLabor;
+    row["rateLabor"] = rateLabor;
+    this.items.at(index).patchValue(row);
+  }
+
+  updateSubTotalCost(itemType: string, index: number): void {
+    if(itemType == "materials"){
+      this.updateMaterialsRowSubTotal(index);
+      this.updateMaterials();
+    }
+    else if(itemType == "misc"){
+      this.updateMiscCharges();
+    }
+    else if(itemType == "labor"){
+      this.updateLaborRowSubTotal(index);
+      this.updateLaborCharges();
+    }
+  }
+
+  updateGrandTotalCost(): void {
+    this.updateSubTotal();
+    this.updateGrandTotal();
+  }
+
+  updateSubTotal(){
     let materialsTotal = this.quoteForm.get('materialsTotal');
     let miscChargesTotal = this.quoteForm.get('miscChargesTotal');
     let laborChargesTotal = this.quoteForm.get('laborChargesTotal');
     let subTotalPrimary = this.quoteForm.get('SubTotalPrimary');
+    let subTotal = this.parseCustomValue(materialsTotal.value) + this.parseCustomValue(miscChargesTotal.value) + this.parseCustomValue(laborChargesTotal.value);
+
+    subTotalPrimary.patchValue(0.00); // need to always start at zero
+    subTotalPrimary.patchValue(subTotal);
+  }
+
+  updateGrandTotal(){
+    let subTotalPrimary = this.quoteForm.get('SubTotalPrimary');
     let taxPrimary = this.quoteForm.get('TaxPrimary');
     let GrandTotalPrimary = this.quoteForm.get('GrandTotalPrimary');
 
-    if(itemType == "materials"){
-      this.items = this.quoteForm.get('items') as FormArray;
-      let numberOfItems = this.items.length;
-      materialsTotal.patchValue(this.customRound(0)); // need to always start at zero
-      for(let i = 0; i<numberOfItems+1; i++){
-        let row = this.items.value[i];
-        let subTotal = parseFloat(row["subTotal"]);
-        let matTotal = parseFloat(materialsTotal.value);
-        materialsTotal.patchValue(this.customRound(matTotal + subTotal));
-      }
-    }
-    else if(itemType == "misc"){
-      this.items = this.quoteForm.get('miscCharges') as FormArray;
-      let numberOfItems = this.items.length;
-      miscChargesTotal.patchValue(this.customRound(0)); // need to always start at zero
-      for(let i = 0; i<numberOfItems+1; i++){
-        let row = this.items.value[i];
-        let subTotal = parseFloat(row["itemTotalMisc"]);
-        let miscTotal = parseFloat(miscChargesTotal.value);
-        miscChargesTotal.patchValue(this.customRound(miscTotal + subTotal));
-      }
-    }
-    else if(itemType == "labor"){
-      this.items = this.quoteForm.get('laborCharges') as FormArray;
-      let numberOfItems = this.items.length;
-      laborChargesTotal.patchValue(this.customRound(0)); // need to always start at zero
-      for(let i = 0; i<numberOfItems+1; i++){
-        let row = this.items.value[i];
-        let subTotal = parseFloat(row["itemTotalLabor"]);
-        let laborTotal = parseFloat(laborChargesTotal.value);
-        laborChargesTotal.patchValue(this.customRound(laborTotal + subTotal));
-      }
-    }
+    let grandTotal = this.parseCustomValue(subTotalPrimary.value) + ((this.parseCustomValue(subTotalPrimary.value) * this.parseCustomValue(taxPrimary.value))/100);
 
-    let subTotal = parseFloat(materialsTotal.value) + parseFloat(miscChargesTotal.value) + parseFloat(laborChargesTotal.value);
-    let grandTotal = parseFloat(taxPrimary.value) + subTotal;
-
-    subTotalPrimary.patchValue(this.customRound(subTotal));
-    GrandTotalPrimary.patchValue(this.customRound(grandTotal));
-
+    GrandTotalPrimary.patchValue(0.00); // need to always start at zero
+    GrandTotalPrimary.patchValue(grandTotal);
   }
 
-  customRound(number): string{
-    return (Math.round(number * 100) / 100).toString();
+  updateMaterials(){
+    let materialsTotal = this.quoteForm.get('materialsTotal');
+    this.items = this.quoteForm.get('items') as FormArray;
+    let numberOfItems = this.items.length;
+    materialsTotal.patchValue(0.00); // need to always start at zero
+    for(let i = 0; i<numberOfItems+1; i++){
+      let row = this.items.value[i];
+      try {
+        materialsTotal.patchValue(this.parseCustomValue(materialsTotal.value) + this.parseCustomValue(row['subTotal']));
+      } catch(TypeError) {}
+    }
+  }
+
+  updateMiscCharges(){
+    let miscChargesTotal = this.quoteForm.get('miscChargesTotal');
+    this.items = this.quoteForm.get('miscCharges') as FormArray;
+    let numberOfItems = this.items.length;
+    miscChargesTotal.patchValue(0.00); // need to always start at zero
+    for(let i = 0; i<numberOfItems+1; i++){
+      let row = this.items.value[i];
+      try {
+        miscChargesTotal.patchValue(this.parseCustomValue(miscChargesTotal.value) + this.parseCustomValue(row["itemTotalMisc"]));
+      } catch(TypeError) {}
+    }
+  }
+
+  updateLaborCharges(){
+    let laborChargesTotal = this.quoteForm.get('laborChargesTotal');
+    this.items = this.quoteForm.get('laborCharges') as FormArray;
+    let numberOfItems = this.items.length;
+    laborChargesTotal.patchValue(0.00); // need to always start at zero
+    for(let i = 0; i<numberOfItems+1; i++){
+      let row = this.items.value[i];
+      try{
+        laborChargesTotal.patchValue(this.parseCustomValue(laborChargesTotal.value) + this.parseCustomValue(row["itemTotalLabor"]));
+      } catch(TypeError) {}
+    }
+  }
+
+  /* Utilities */
+  parseCustomValue(input: any): any {
+    if(isNaN(input) || this.isNullOrEmpty(input)){ return 0.00; }
+
+    try { return parseFloat(input); }
+    catch (e) {
+      console.log(`Cannot parseCustomValue. ${e.message}`)
+      return 0.00;
+    }
+  }
+
+  isNullOrEmpty(input: string): any{
+    switch(input){
+      case "":
+      case null:
+      case undefined:
+        return true;
+      default: false;
+    }
   }
 
 }

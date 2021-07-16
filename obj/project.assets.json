@@ -557,7 +557,7 @@
     ]
   },
   "packageFolders": {
-    "/root/.nuget/packages/": {}
+    "/home/josh/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -565,11 +565,11 @@
       "projectUniqueName": "/home/josh/Documents/Github/Gotango/gotango.csproj",
       "projectName": "gotango",
       "projectPath": "/home/josh/Documents/Github/Gotango/gotango.csproj",
-      "packagesPath": "/root/.nuget/packages/",
+      "packagesPath": "/home/josh/.nuget/packages/",
       "outputPath": "/home/josh/Documents/Github/Gotango/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/root/.nuget/NuGet/NuGet.Config"
+        "/home/josh/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -614,7 +614,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/3.1.116/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.411/RuntimeIdentifierGraph.json"
       }
     }
   }
