@@ -76,8 +76,8 @@
     <label class="col_qty">Quantity</label>
     <label class="col_sku">SKU</label>
     <label class="col_description">Description</label>
-    <label class="col_unitCost">Unit</label>
-    <label class="col_itemTotal">Total</label>
+    <label class="col_unitCost">Unit ({{this.locale}})</label>
+    <label class="col_itemTotal">Total ({{this.locale}})</label>
   </div>
 	<div formArrayName="items" *ngFor="let item of quoteForm.get('items')['controls']; let i = index;">
 		<div [formGroupName]="i" class="row-item">
@@ -93,7 +93,7 @@
     <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('materials')">+</button>
 		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('materials')">-</button>
     <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('materials')">Clear</button>
-    <label class="col_SubTotalLabel pl-1em">Materials Total</label>
+    <label class="col_SubTotalLabel pl-1em">Materials Total ({{this.locale}})</label>
     <input formControlName="materialsTotal" class="col_SubTotal" type="text" placeholder="0.00" [readonly]="true">
   </div>
 
@@ -102,7 +102,7 @@
   <div id="miscChargesHeader" class="row-item">
     <label class="row-index dBlock">Item</label>
     <label class="col_descriptionMisc">Description</label>
-    <label class="col_itemTotalMisc">Total</label>
+    <label class="col_itemTotalMisc">Total ({{this.locale}})</label>
   </div>
 	<div formArrayName="miscCharges" *ngFor="let item of quoteForm.get('miscCharges')['controls']; let i = index;">
 		<div [formGroupName]="i" class="row-item">
@@ -115,7 +115,7 @@
     <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('misc')">+</button>
 		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('misc')">-</button>
     <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('misc')">Clear</button>
-    <label class="col_SubTotalLabel pl-1em">Misc Charges Total</label>
+    <label class="col_SubTotalLabel pl-1em">Misc Charges Total ({{this.locale}})</label>
     <input formControlName="miscChargesTotal" class="col_SubTotal" type="text" placeholder="0.00" [readonly]="true">
   </div>
 
@@ -124,8 +124,8 @@
     <label class="row-index dBlock">Item</label>
     <label class="col_descriptionLabor">Description</label>
     <label class="col_HoursLabor">Hours</label>
-    <label class="col_RateLabor">Rate</label>
-    <label class="col_TotalLabor">Total</label>
+    <label class="col_RateLabor">Rate ({{this.locale}})</label>
+    <label class="col_TotalLabor">Total ({{this.locale}})</label>
   </div>
 	<div formArrayName="laborCharges" *ngFor="let item of quoteForm.get('laborCharges')['controls']; let i = index;">
 		<div [formGroupName]="i" class="row-item">
@@ -133,23 +133,23 @@
 			<input formControlName="descriptionLabor" class="col_descriptionLabor" type="text" placeholder="Labor Description">
       <input formControlName="hoursLabor" class="col_HoursLabor" type="text" placeholder="Labor Hours" (change)="onLaborItemChange($event, i)">
       <input formControlName="rateLabor" class="col_RateLabor" type="text" placeholder="Labor Rate" (change)="onLaborItemChange($event, i)">
-			<input formControlName="itemTotalLabor" class="col_TotalLabor" type="text" placeholder="0">
+			<input formControlName="itemTotalLabor" class="col_TotalLabor" type="text" placeholder="0" [readonly]="true">
 		</div>
 	</div>
   <div class="text-center row-item">
     <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('labor')">+</button>
 		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('labor')">-</button>
     <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('misc')">Clear</button>
-    <label class="col_SubTotalLabel pl-1em">Labor Charges Total</label>
+    <label class="col_SubTotalLabel pl-1em">Labor Charges Total ({{this.locale}})</label>
     <input formControlName="laborChargesTotal" class="col_SubTotal" type="text" placeholder="0.00" [readonly]="true">
   </div>
 
 
   <div id="totals" class="mt-4em">
     <div id="TotalChargesHeader" class="row-item">
-      <label class="col_SubTotalPrimary">SubTotal</label>
-      <label class="col_TaxPrimary">Tax</label>
-      <label class="col_GrandTotalPrimary">Grand Total</label>
+      <label class="col_SubTotalPrimary">SubTotal ({{this.locale}})</label>
+      <label class="col_TaxPrimary">Tax (%)</label>
+      <label class="col_GrandTotalPrimary">Grand Total ({{this.locale}})</label>
     </div>
     <div class="text-center row-item">
       <input formControlName="SubTotalPrimary" class="col_SubTotalPrimary" type="text" placeholder="0.00" [readonly]="true">

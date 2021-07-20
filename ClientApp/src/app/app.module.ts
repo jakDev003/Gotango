@@ -12,7 +12,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewQuoteComponent } from './components/new-quote/new-quote.component';
-
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { NewQuoteComponent } from './components/new-quote/new-quote.component';
     ]),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
