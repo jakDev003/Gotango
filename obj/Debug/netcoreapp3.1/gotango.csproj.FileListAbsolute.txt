@@ -48,5 +48,3 @@
 /home/josh/Documents/Github/gotango/obj/Debug/netcoreapp3.1/staticwebassets/gotango.StaticWebAssets.xml
 /home/josh/Documents/Github/gotango/obj/Debug/netcoreapp3.1/gotango.dll
 /home/josh/Documents/Github/gotango/obj/Debug/netcoreapp3.1/gotango.pdb
-/home/josh/Documents/Github/Gotango/obj/Debug/netcoreapp3.1/gotango.csproj.CoreCompileInputs.cache
-/home/josh/Documents/Github/Gotango/obj/Debug/netcoreapp3.1/gotango.genruntimeconfig.cache

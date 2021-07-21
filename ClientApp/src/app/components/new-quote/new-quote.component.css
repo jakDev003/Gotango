@@ -147,11 +147,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .col_GrandTotalPrimary{
-  width: calc((100% / 6)*1);
+  width: calc((100% / 6)*2);
 }
 
 #totals{
-  margin-left: 30vw;
   width: 90%;
   margin-bottom: 2em;
 }

@@ -1,10 +1,13 @@
 <h1 class="header">Estimate</h1>
+<hr>
 <form [formGroup]="quoteForm">
   <div class="row-item" *ngIf="submitted">
     <div class="invalid-feedback" *ngIf="f.customerName.errors.required">Customer Name is required</div>
     <div class="invalid-feedback" *ngIf="f.email.errors.required">Customer Email is required</div>
     <div class="invalid-feedback" *ngIf="f.phone.errors.required">Customer Telephone is required</div>
     <div class="invalid-feedback" *ngIf="f.quoteNum.errors.required">Quote Number is required</div>
+    <div class="invalid-feedback" *ngIf="f.countryOrTerritory.errors.required">Country or territory is required</div>
+    <div class="invalid-feedback" *ngIf="f.address1.errors.required">Address1 is required</div>
     <div formArrayName="items" *ngFor="let item of quoteForm.get('items')['controls']; let i = index;">
       <div class="invalid-feedback" *ngIf="item.f.quantity.errors.required">Quantity is required for item {{i}}.</div>
       <div class="invalid-feedback" *ngIf="item.f.sku.errors.required">SKU is required for item {{i}}.</div>
@@ -13,7 +16,7 @@
       <div class="invalid-feedback" *ngIf="item.f.subTotal.errors.required">Subtotal is required for item {{i}}.</div>
     </div>
   </div>
-
+  <hr>
   <h2>Information</h2>
   <div id="customerInfoHeader01" class="row-item">
     <label class="col_quoteNum">Quote Number</label>
@@ -69,7 +72,7 @@
     <textarea name="description" formControlName="descriptionOfWork" maxlength="300" class="col_descriptionOfWork" placeholder="What are you doing on this job?" wrap="hard"></textarea>
   </div>
 
-
+  <hr>
   <h2>Materials</h2>
   <div id="materialsHeader" class="row-item">
     <label class="row-index">Item</label>
@@ -90,14 +93,14 @@
 		</div>
 	</div>
   <div class="text-center row-item">
-    <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('materials')">+</button>
-		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('materials')">-</button>
-    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('materials')">Clear</button>
+    <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('materials')">➕</button>
+		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('materials')">➖</button>
+    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('materials')">🗑️</button>
     <label class="col_SubTotalLabel pl-1em">Materials Total ({{this.locale}})</label>
     <input formControlName="materialsTotal" class="col_SubTotal" type="text" placeholder="0.00" [readonly]="true">
   </div>
 
-
+  <hr>
   <h2>Miscellaneous Charges</h2>
   <div id="miscChargesHeader" class="row-item">
     <label class="row-index dBlock">Item</label>
@@ -112,13 +115,14 @@
 		</div>
 	</div>
   <div class="text-center row-item">
-    <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('misc')">+</button>
-		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('misc')">-</button>
-    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('misc')">Clear</button>
+    <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('misc')">➕</button>
+		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('misc')">➖</button>
+    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('misc')">🗑️</button>
     <label class="col_SubTotalLabel pl-1em">Misc Charges Total ({{this.locale}})</label>
     <input formControlName="miscChargesTotal" class="col_SubTotal" type="text" placeholder="0.00" [readonly]="true">
   </div>
 
+  <hr>
   <h2>Labor Charges</h2>
   <div id="laborChargesHeader" class="row-item">
     <label class="row-index dBlock">Item</label>
@@ -137,14 +141,14 @@
 		</div>
 	</div>
   <div class="text-center row-item">
-    <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('labor')">+</button>
-		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('labor')">-</button>
-    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('misc')">Clear</button>
+    <button type="button" class="quoteFormBtn btn-secondary pw-1vw" (click)="addItem('labor')">➕</button>
+		<button type="button" class="quoteFormBtn btn-tertiary pw-1vw" (click)="removeItem('labor')">➖</button>
+    <button type="reset" class="quoteFormBtn btn-warn" (click)="onReset('misc')">🗑️</button>
     <label class="col_SubTotalLabel pl-1em">Labor Charges Total ({{this.locale}})</label>
     <input formControlName="laborChargesTotal" class="col_SubTotal" type="text" placeholder="0.00" [readonly]="true">
   </div>
 
-
+  <hr>
   <div id="totals" class="mt-4em">
     <div id="TotalChargesHeader" class="row-item">
       <label class="col_SubTotalPrimary">SubTotal ({{this.locale}})</label>
@@ -155,8 +159,8 @@
       <input formControlName="SubTotalPrimary" class="col_SubTotalPrimary" type="text" placeholder="0.00" [readonly]="true">
       <input formControlName="TaxPrimary" class="col_TaxPrimary" type="text" placeholder="0.00" (change)="onTaxChange($event)">
       <input formControlName="GrandTotalPrimary" class="col_GrandTotalPrimary" type="text" placeholder="0.00" [readonly]="true">
-      <button type="submit"class="quoteFormBtn btn-primary align-right" (click)="onSubmit()">Submit</button>
-      <button type="reset" class="quoteFormBtn btn-warn align-right" (click)="onReset('all')">Clear</button>
+      <button type="submit"class="quoteFormBtn btn-primary align-right" (click)="onSubmit()">💾 Submit</button>
+      <button type="reset" class="quoteFormBtn btn-warn align-right" (click)="onReset('all')">🗑️ Clear All</button>
     </div>
   </div>
 </form>
